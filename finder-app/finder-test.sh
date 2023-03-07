@@ -5,6 +5,9 @@
 set -e
 set -u
 
+make clean
+make
+
 NUMFILES=10
 WRITESTR=AELD_IS_FUN
 WRITEDIR=/tmp/aeld-data
@@ -18,7 +21,7 @@ then
 		echo "Using default value ${NUMFILES} for number of files to write"
 	else
 		NUMFILES=$1
-	fi	
+	fi
 else
 	NUMFILES=$1
 	WRITESTR=$2
@@ -54,7 +57,7 @@ fi
 
 for i in $( seq 1 $NUMFILES)
 do
-	./writer.sh "$WRITEDIR/${username}$i.txt" "$WRITESTR"
+	./writer "$WRITEDIR/${username}$i.txt" "$WRITESTR"
 done
 
 OUTPUTSTRING=$(./finder.sh "$WRITEDIR" "$WRITESTR")
